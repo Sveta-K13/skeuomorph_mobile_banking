@@ -71,7 +71,7 @@ class _SwipeButtonState extends State<SwipeButton>
                   boxShadow: <BoxShadow>[
                     BoxShadow(
                         color: Color(0xFF3A5165)
-                            .withOpacity(isSwitched ? 0.5 : 0.3)),
+                            .withOpacity(isSwitched ? 0.5 : 0.2)),
                     BoxShadow(
                       color: colorTween.value,
                       spreadRadius: -0.3,
@@ -118,7 +118,7 @@ class _SwipeButtonState extends State<SwipeButton>
                     borderRadius: BorderRadius.all(Radius.circular(_radius)),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                          color: Color(0xFF3A5165).withOpacity(0.3),
+                          color: Color(0xFF3A5165).withOpacity(0.2),
                           offset: Offset(isSwitched ? 2.0 : -2.0, 0.0),
                           blurRadius: 6),
                     ]),
