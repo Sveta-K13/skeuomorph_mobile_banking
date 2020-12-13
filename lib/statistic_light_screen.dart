@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:skeuomorph_mobile_banking/models/outcome.dart';
 import 'package:skeuomorph_mobile_banking/theme.dart';
+import 'package:skeuomorph_mobile_banking/widgets/category_card.dart';
 import 'package:skeuomorph_mobile_banking/widgets/period_card.dart';
 import 'package:skeuomorph_mobile_banking/widgets/swipe_button.dart';
 
@@ -11,6 +13,13 @@ class StatisticLightScreen extends StatefulWidget {
 }
 
 class _StatisticLightScreenState extends State<StatisticLightScreen> {
+  List<Outcome> outcomes = <Outcome>[
+    Outcome('assets/icons/shopping.png', 'Shopping', 50, 3187.16),
+    Outcome('assets/icons/restaurant.png', 'Restaurants', 25, 1593.58),
+    Outcome('assets/icons/taxi.png', 'Transport', 15, 956.14),
+    Outcome('assets/icons/pharmacy.png', 'Pharmacy', 10, 637.44),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,31 +53,39 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
             ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              PeriodCard(),
-              Container(
-                height: 295,
-                width: 295,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            PeriodCard(),
+            Container(
+              height: 295,
+              width: 295,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+              ),
+            ),
+            Flexible(
+              child: Container(
+                height: 128,
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: outcomes.length,
+                      itemBuilder: (BuildContext context, int i) =>
+                          CategoryCard(outcomes[i])),
                 ),
               ),
-              Container(
-                height: 94,
-                color: Colors.white,
-              ),
-              Container(
-                height: 64,
-                color: Colors.white,
-              ),
-            ],
-          ),
+            ),
+            Container(
+              height: 64,
+              color: Colors.white,
+            ),
+          ],
         ),
       ),
     );

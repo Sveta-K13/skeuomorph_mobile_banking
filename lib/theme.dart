@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 
 const Color bgColor = Color(0xFFE3EDF7);
 const Color textColor = Color(0xFF31456A);
+const Color uiBgColor = Color(0xFFEDF2F8);
 const String fontFamily = 'Poppins';
+
+BorderRadius boxBorderRadius = BorderRadius.all(Radius.circular(16));
 
 LinearGradient iconGradient = LinearGradient(
   colors: <Color>[
@@ -26,7 +29,7 @@ List<BoxShadow> skShadow = <BoxShadow>[
   ),
   BoxShadow(
     blurRadius: 6.0,
-    offset: Offset(-3.5, -2.5),
+    offset: Offset(-2.5, -1.5),
     color: Color(0xFFFFFFFF),
   ),
 ];

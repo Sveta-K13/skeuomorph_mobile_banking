@@ -31,7 +31,7 @@ class _SoftButtonState extends State<SoftButton> {
                   Color(0xFFFFFFFF),
                 ], transform: GradientRotation(pi / 4))
               : null,
-          color: Color(0xFFEDF2F8),
+          color: uiBgColor,
           shape: BoxShape.circle,
         ),
         child: Padding(

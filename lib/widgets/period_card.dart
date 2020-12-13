@@ -9,9 +9,7 @@ class PeriodCard extends StatelessWidget {
       constraints: BoxConstraints(minHeight: 64.0),
       margin: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
       decoration: BoxDecoration(
-          color: Color(0xFFEDF2F8),
-          borderRadius: BorderRadius.all(Radius.circular(16.0)),
-          boxShadow: skShadow),
+          color: uiBgColor, borderRadius: boxBorderRadius, boxShadow: skShadow),
       child: Row(
         children: [
           Padding(
