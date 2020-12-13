@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:skeuomorph_mobile_banking/theme.dart';
+import 'package:skeuomorph_mobile_banking/widgets/period_card.dart';
 import 'package:skeuomorph_mobile_banking/widgets/swipe_button.dart';
 
 class StatisticLightScreen extends StatefulWidget {
@@ -49,18 +50,7 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 128, vertical: 24),
-                color: Colors.white,
-                child: Text(
-                  'Period',
-                  style: TextStyle(
-                    color: textColor.withOpacity(0.6),
-                    fontFamily: fontFamily,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
+              PeriodCard(),
               Container(
                 height: 295,
                 width: 295,

@@ -22,42 +22,30 @@ class _SoftButtonState extends State<SoftButton> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.all(4.0),
+        margin: EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 8.0,
-              offset: Offset(2.5, 1.5),
-              color: Color(0xFF8CA2B7).withOpacity(0.4),
-            ),
-            BoxShadow(
-              blurRadius: 6.0,
-              offset: Offset(-2.5, -1.5),
-              color: Color(0xFFFFFFFF),
-            ),
-          ],
-          gradient: LinearGradient(
-              colors: isTapped
-                  ? <Color>[
-                      Color(0xFFB9CCE2).withOpacity(0.4),
-                      Color(0xFFFFFFFF),
-                    ]
-                  : [
-                      Color(0xFFEDF2F8),
-                      Color(0xFFEDF2F8),
-                    ],
-              transform: GradientRotation(pi / 4)),
-          //color: Color(0xFFE3EDF7),
+          boxShadow: skShadow,
+          gradient: isTapped
+              ? LinearGradient(colors: <Color>[
+                  Color(0xFFB9CCE2).withOpacity(0.4),
+                  Color(0xFFFFFFFF),
+                ], transform: GradientRotation(pi / 4))
+              : null,
+          color: Color(0xFFEDF2F8),
           shape: BoxShape.circle,
         ),
         child: Padding(
-          padding: EdgeInsets.all(14),
+          padding: EdgeInsets.all(10),
           child: ShaderMask(
-              shaderCallback: (Rect bounds) {
-                return iconGradient.createShader(bounds);
-              },
-              blendMode: BlendMode.srcIn,
-              child: Icon(Icons.arrow_forward_ios)),
+            shaderCallback: (Rect bounds) {
+              return iconGradient.createShader(bounds);
+            },
+            blendMode: BlendMode.srcIn,
+            child: Icon(
+              Icons.arrow_forward_ios,
+              size: 16.0,
+            ),
+          ),
         ),
       ),
     );

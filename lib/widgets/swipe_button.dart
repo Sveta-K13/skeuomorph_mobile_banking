@@ -24,7 +24,7 @@ class _SwipeButtonState extends State<SwipeButton>
     position = Tween<Offset>(begin: Offset(0.0, 0.0), end: Offset(-0.5, 0.0))
         .animate(CurvedAnimation(
             parent: _slideController, curve: Curves.decelerate));
-    colorTween = ColorTween(begin: Color(0xFFDEE8F2), end: Color(0xFFA1B8CF))
+    colorTween = ColorTween(begin: Color(0xFFEDF2F8), end: Color(0xFFA1B8CF))
         .animate(CurvedAnimation(
             parent: _slideController, curve: Curves.decelerate));
     super.initState();
@@ -71,7 +71,7 @@ class _SwipeButtonState extends State<SwipeButton>
               decoration: BoxDecoration(
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                        color: Color(0xFF3A5165)
+                        color: Color(0xFF8CA2B7)
                             .withOpacity(isSwitched ? 0.5 : 0.2)),
                     BoxShadow(
                       color: colorTween.value,
@@ -79,7 +79,6 @@ class _SwipeButtonState extends State<SwipeButton>
                       blurRadius: 6,
                     ),
                   ],
-                  // color: Color(0xFFDEE8F2),
                   borderRadius: BorderRadius.all(Radius.circular(_radius))),
             ),
           ),
@@ -105,7 +104,7 @@ class _SwipeButtonState extends State<SwipeButton>
                 height: 35,
                 width: 35,
                 decoration: BoxDecoration(
-                    color: Color(0xFFE3EDF7),
+                    color: Color(0xFFEDF2F8),
                     borderRadius: BorderRadius.all(Radius.circular(_radius)),
                     boxShadow: <BoxShadow>[
                       BoxShadow(

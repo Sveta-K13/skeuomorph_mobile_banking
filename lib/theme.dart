@@ -15,5 +15,18 @@ LinearGradient iconGradient = LinearGradient(
     Color(0xFFEDF2F7),
   ],
   stops: [0.0, 0.6, 0.8, 0.95, 1.0],
-  transform: GradientRotation(pi+pi/6),
+  transform: GradientRotation(pi + pi / 6),
 );
+
+List<BoxShadow> skShadow = <BoxShadow>[
+  BoxShadow(
+    blurRadius: 8.0,
+    offset: Offset(3.5, 2.5),
+    color: Color(0xFF8CA2B7).withOpacity(0.4),
+  ),
+  BoxShadow(
+    blurRadius: 6.0,
+    offset: Offset(-3.5, -2.5),
+    color: Color(0xFFFFFFFF),
+  ),
+];
