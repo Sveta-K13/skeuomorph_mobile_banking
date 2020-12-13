@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:skeuomorph_mobile_banking/theme.dart';
 
 class SwipeButton extends StatefulWidget {
   @override
@@ -87,17 +88,7 @@ class _SwipeButtonState extends State<SwipeButton>
           padding: const EdgeInsets.all(8.0),
           child: ShaderMask(
               shaderCallback: (Rect bounds) {
-                return LinearGradient(
-                  colors: <Color>[
-                    Color(0xFF48647D),
-                    Color(0xFF6B8299),
-                    Color(0xFFDAE2EB),
-                    Color(0xFF8CA2B7),
-                    Color(0xFFEDF2F7),
-                  ],
-                  stops: [0.0, 0.3, 0.8, 0.85, 0.95],
-                  transform: GradientRotation(pi / 3),
-                ).createShader(bounds);
+                return iconGradient.createShader(bounds);
               },
               blendMode: BlendMode.srcIn,
               child: Icon(
