@@ -3,18 +3,18 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:skeuomorph_mobile_banking/theme.dart';
 
-class curveButton extends StatelessWidget {
+class CurveButton extends StatelessWidget {
   final bool isPressed;
   final String iconBorder;
   final String icon;
 
-  curveButton(this.isPressed, this.iconBorder, this.icon);
+  CurveButton(this.isPressed, this.iconBorder, this.icon);
 
   Widget _buildUntappedButton() {
     return Container(
       margin: EdgeInsets.all(8.0),
-      height: 56,
-      width: 56,
+      height: 64,
+      width: 64,
       decoration: BoxDecoration(
         borderRadius: boxBorderRadius,
         color: uiBgColor,
@@ -28,7 +28,7 @@ class curveButton extends StatelessWidget {
             blendMode: BlendMode.srcIn,
             child: Image.asset(
               iconBorder,
-              height: 20,
+              height: 24,
             )),
       ),
     );
@@ -38,8 +38,8 @@ class curveButton extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(8.0),
       padding: EdgeInsets.all(1.0),
-      height: 56,
-      width: 56,
+      height: 64,
+      width: 64,
       decoration: BoxDecoration(
         borderRadius: boxBorderRadius,
         gradient: rotatedBorderGradient,
@@ -72,7 +72,7 @@ class curveButton extends StatelessWidget {
                     blendMode: BlendMode.srcIn,
                     child: Image.asset(
                       icon,
-                      height: 20,
+                      height: 24,
                     )),
                 ShaderMask(
                     shaderCallback: (Rect bound) {
@@ -81,7 +81,7 @@ class curveButton extends StatelessWidget {
                     blendMode: BlendMode.srcIn,
                     child: Image.asset(
                       iconBorder,
-                      height: 20,
+                      height: 24,
                     )),
               ],
             ),

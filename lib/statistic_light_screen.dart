@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:skeuomorph_mobile_banking/models/outcome.dart';
 import 'package:skeuomorph_mobile_banking/theme.dart';
 import 'package:skeuomorph_mobile_banking/widgets/category_card.dart';
+import 'package:skeuomorph_mobile_banking/widgets/curve_button.dart';
 import 'package:skeuomorph_mobile_banking/widgets/period_card.dart';
 import 'package:skeuomorph_mobile_banking/widgets/swipe_button.dart';
 
@@ -19,6 +20,27 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
     Outcome('assets/icons/taxi.png', 'Transport', 15, 956.14),
     Outcome('assets/icons/pharmacy.png', 'Pharmacy', 10, 637.44),
   ];
+
+  List<Map<String, String>> bottomIcons = <Map<String, String>>[
+    {
+      'icon': 'assets/icons/home.png',
+      'filled_icon': 'assets/icons/filled_home.png',
+    },
+    {
+      'icon': 'assets/icons/plus.png',
+      'filled_icon': 'assets/icons/filled_plus.png'
+    },
+    {
+      'icon': 'assets/icons/card.png',
+      'filled_icon': 'assets/icons/filled_card.png'
+    },
+    {
+      'icon': 'assets/icons/settings.png',
+      'filled_icon': 'assets/icons/filled_settings.png'
+    },
+  ];
+
+  int currentIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -81,10 +103,26 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
                 ),
               ),
             ),
-            Container(
-              height: 64,
-              color: uiBgColor,
-            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: bottomIcons
+                    .map((Map<String, String> map) => GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              currentIndex = bottomIcons.indexOf(map);
+                            });
+                          },
+                          child: CurveButton(
+                              bottomIcons.indexOf(map) == currentIndex,
+                              map['icon'],
+                              map['filled_icon']),
+                        ))
+                    .toList(),
+              ),
+            )
           ],
         ),
       ),
