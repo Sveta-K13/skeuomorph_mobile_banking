@@ -63,7 +63,7 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
               width: 295,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.white,
+                color: uiBgColor,
               ),
             ),
             Flexible(
@@ -83,7 +83,7 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
             ),
             Container(
               height: 64,
-              color: Colors.white,
+              color: uiBgColor,
             ),
           ],
         ),

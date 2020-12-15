@@ -22,13 +22,9 @@ class CategoryCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(1.0),
         decoration: BoxDecoration(
-            borderRadius: boxBorderRadius,
-            gradient: LinearGradient(
-              colors: <Color>[
-                Color(0xFFFFFFFF),
-                Color(0xFF8CA2B7).withOpacity(0.4)
-              ],
-            )),
+          borderRadius: boxBorderRadius,
+          gradient: borderGradient,
+        ),
         child: Container(
           padding: EdgeInsets.all(16.0),
           decoration: BoxDecoration(

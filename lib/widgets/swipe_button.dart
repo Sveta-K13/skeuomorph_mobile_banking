@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skeuomorph_mobile_banking/theme.dart';
@@ -56,30 +54,22 @@ class _SwipeButtonState extends State<SwipeButton>
           width: 80,
           padding: EdgeInsets.all(2.0),
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: <Color>[
-                  Color(0xFFFFFFFF),
-                  Color(0xFFCADAEC),
-                ],
-                transform: GradientRotation(pi / 3),
-              ),
+              gradient: rotatedBorderGradient,
               borderRadius: BorderRadius.all(Radius.circular(_radius + 1))),
           child: AnimatedBuilder(
             animation: colorTween,
             builder: (BuildContext context, child) => Container(
               padding: EdgeInsets.symmetric(horizontal: 4.0),
-              decoration: BoxDecoration(
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: Color(0xFF8CA2B7)
-                            .withOpacity(isSwitched ? 0.5 : 0.2)),
-                    BoxShadow(
-                      color: colorTween.value,
-                      spreadRadius: -0.3,
-                      blurRadius: 6,
-                    ),
-                  ],
-                  borderRadius: BorderRadius.all(Radius.circular(_radius))),
+              decoration: BoxDecoration(boxShadow: <BoxShadow>[
+                BoxShadow(
+                    color:
+                        Color(0xFF8CA2B7).withOpacity(isSwitched ? 0.5 : 0.2)),
+                BoxShadow(
+                  color: colorTween.value,
+                  spreadRadius: -0.3,
+                  blurRadius: 6,
+                ),
+              ], borderRadius: BorderRadius.all(Radius.circular(_radius))),
             ),
           ),
         ),

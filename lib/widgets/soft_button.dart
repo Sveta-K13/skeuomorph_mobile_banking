@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:skeuomorph_mobile_banking/theme.dart';
 
@@ -25,12 +23,7 @@ class _SoftButtonState extends State<SoftButton> {
         margin: EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           boxShadow: skShadow,
-          gradient: isTapped
-              ? LinearGradient(colors: <Color>[
-                  Color(0xFFB9CCE2).withOpacity(0.4),
-                  Color(0xFFFFFFFF),
-                ], transform: GradientRotation(pi / 4))
-              : null,
+          gradient: isTapped ? innerBoxGradient : null,
           color: uiBgColor,
           shape: BoxShape.circle,
         ),
