@@ -72,5 +72,13 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
+  fonts:
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/Gilroy-Regular.ttf
+        - asset: assets/fonts/Gilroy-Bold.ttf
+          weight: 600
+        - asset: assets/fonts/Gilroy-Semibold.ttf
+          weight: 500
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
