@@ -32,7 +32,7 @@ class _LampButtonState extends State<LampButton>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 90,
       decoration: BoxDecoration(
           shape: BoxShape.circle, color: uiBgColor, boxShadow: skShadow),
       child: Stack(
@@ -52,7 +52,7 @@ class _LampButtonState extends State<LampButton>
                     startAngle: 115,
                     space: 10),
               ],
-              radius: 45,
+              radius: 43,
             ),
           ),
           AnimatedBuilder(

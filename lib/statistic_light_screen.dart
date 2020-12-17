@@ -6,6 +6,7 @@ import 'package:skeuomorph_mobile_banking/theme.dart';
 import 'package:skeuomorph_mobile_banking/widgets/category_card.dart';
 import 'package:skeuomorph_mobile_banking/widgets/curve_button.dart';
 import 'package:skeuomorph_mobile_banking/widgets/period_card.dart';
+import 'package:skeuomorph_mobile_banking/widgets/pie_chart.dart';
 import 'package:skeuomorph_mobile_banking/widgets/swipe_button.dart';
 
 class StatisticLightScreen extends StatefulWidget {
@@ -15,10 +16,10 @@ class StatisticLightScreen extends StatefulWidget {
 
 class _StatisticLightScreenState extends State<StatisticLightScreen> {
   List<Outcome> outcomes = <Outcome>[
-    Outcome('assets/icons/shopping.png', 'Shopping', 50, 3187.16),
-    Outcome('assets/icons/restaurant.png', 'Restaurants', 25, 1593.58),
-    Outcome('assets/icons/taxi.png', 'Transport', 15, 956.14),
-    Outcome('assets/icons/pharmacy.png', 'Pharmacy', 10, 637.44),
+    Outcome('assets/icons/shopping.png', 'Shopping', 50, 3187.16, Color(0xFFE60A0A)),
+    Outcome('assets/icons/restaurant.png', 'Restaurants', 25, 1593.58, Color(0xFFE6660A)),
+    Outcome('assets/icons/taxi.png', 'Transport', 15, 956.14, Color(0xFFE6D00A)),
+    Outcome('assets/icons/pharmacy.png', 'Pharmacy', 10, 637.44, Color(0xFF92E60A)),
   ];
 
   List<Map<String, String>> bottomIcons = <Map<String, String>>[
@@ -80,13 +81,9 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             PeriodCard(),
-            Container(
-              height: 295,
-              width: 295,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: uiBgColor,
-              ),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: PieChart(outcomes),
             ),
             Flexible(
               child: Container(
