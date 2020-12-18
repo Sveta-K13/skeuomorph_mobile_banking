@@ -16,10 +16,14 @@ class StatisticLightScreen extends StatefulWidget {
 
 class _StatisticLightScreenState extends State<StatisticLightScreen> {
   List<Outcome> outcomes = <Outcome>[
-    Outcome('assets/icons/shopping.png', 'Shopping', 50, 3187.16, Color(0xFFE60A0A)),
-    Outcome('assets/icons/restaurant.png', 'Restaurants', 25, 1593.58, Color(0xFFE6660A)),
-    Outcome('assets/icons/taxi.png', 'Transport', 15, 956.14, Color(0xFFE6D00A)),
-    Outcome('assets/icons/pharmacy.png', 'Pharmacy', 10, 637.44, Color(0xFF92E60A)),
+    Outcome('assets/icons/shopping.png', 'Shopping', 50, 3187.16,
+        Color(0xFFE60A0A)),
+    Outcome('assets/icons/restaurant.png', 'Restaurants', 25, 1593.58,
+        Color(0xFFE6660A)),
+    Outcome(
+        'assets/icons/taxi.png', 'Transport', 15, 956.14, Color(0xFFE6D00A)),
+    Outcome(
+        'assets/icons/pharmacy.png', 'Pharmacy', 10, 637.44, Color(0xFF92E60A)),
   ];
 
   List<Map<String, String>> bottomIcons = <Map<String, String>>[
@@ -49,7 +53,7 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: <Color>[
           Color(0xFFF1F5F8),
-          Color(0xFFDDE7F3),
+          Color(0xFFEDF2F8),
           Color(0xFFE5F0F9),
         ], transform: GradientRotation(pi / 2), tileMode: TileMode.clamp),
       ),
@@ -83,7 +87,7 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
             PeriodCard(),
             Padding(
               padding: const EdgeInsets.all(24.0),
-              child: PieChart(outcomes),
+              child: PieChart(outcomes: outcomes),
             ),
             Flexible(
               child: Container(
