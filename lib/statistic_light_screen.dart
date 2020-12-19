@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skeuomorph_mobile_banking/models/outcome.dart';
 import 'package:skeuomorph_mobile_banking/theme.dart';
+import 'package:skeuomorph_mobile_banking/utils/CustomScrollPhysics.dart';
 import 'package:skeuomorph_mobile_banking/widgets/category_card.dart';
 import 'package:skeuomorph_mobile_banking/widgets/curve_button.dart';
 import 'package:skeuomorph_mobile_banking/widgets/period_card.dart';
@@ -45,7 +47,26 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
     },
   ];
 
-  int currentIndex = 2;
+  ScrollController _scrollController;
+  ScrollPhysics _physics;
+
+  int currentBottomIndex = 2;
+  int currentListIndex = 0;
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.position.haveDimensions && _physics == null) {
+        setState(() {
+          var dimension = _scrollController.position.maxScrollExtent /
+              (outcomes.length - 1);
+          _physics = CustomScrollPhysics(itemDimension: dimension);
+        });
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,20 +108,47 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
             PeriodCard(),
             Padding(
               padding: const EdgeInsets.all(24.0),
-              child: PieChart(outcomes: outcomes),
+              child: PieChart(
+                outcomes: outcomes,
+                currentIndex: currentListIndex,
+              ),
             ),
             Flexible(
               child: Container(
                 height: 128,
-                child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: outcomes.length,
-                      itemBuilder: (BuildContext context, int i) =>
-                          CategoryCard(outcomes[i])),
+                child: NotificationListener<ScrollNotification>(
+                  onNotification: (scrollNotification) {
+                    setState(() {
+                      currentListIndex = _scrollController.offset ~/
+                          (MediaQuery.of(context).size.width - 80);
+                    });
+                    return true;
+                  },
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    physics: _physics,
+                    scrollDirection: Axis.horizontal,
+                    child: ListView.builder(
+                        physics: _physics,
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemCount: outcomes.length,
+                        itemBuilder: (BuildContext context, int i) {
+                          if (i == 0) {
+                            return Padding(
+                              padding: EdgeInsets.only(left: 24.0),
+                              child: CategoryCard(outcomes[i]),
+                            );
+                          }
+                          if (i == outcomes.length - 1) {
+                            return Padding(
+                              padding: EdgeInsets.only(right: 24.0),
+                              child: CategoryCard(outcomes[i]),
+                            );
+                          }
+                          return CategoryCard(outcomes[i]);
+                        }),
+                  ),
                 ),
               ),
             ),
@@ -113,11 +161,11 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
                     .map((Map<String, String> map) => GestureDetector(
                           onTap: () {
                             setState(() {
-                              currentIndex = bottomIcons.indexOf(map);
+                              currentBottomIndex = bottomIcons.indexOf(map);
                             });
                           },
                           child: CurveButton(
-                              bottomIcons.indexOf(map) == currentIndex,
+                              bottomIcons.indexOf(map) == currentBottomIndex,
                               map['icon'],
                               map['filled_icon']),
                         ))
