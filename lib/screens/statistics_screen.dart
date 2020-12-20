@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../main.dart';
+import 'package:skeuomorph_mobile_banking/widgets/category_card.dart';
+import 'package:skeuomorph_mobile_banking/widgets/period_card.dart';
+import 'package:skeuomorph_mobile_banking/widgets/pie_chart.dart';
 
 class StatisticsScreen extends StatelessWidget {
   final String title;
@@ -9,6 +10,7 @@ class StatisticsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -41,16 +43,66 @@ class StatisticsScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 32.0,
-                vertical: 32.0,
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 32.0,
+                right: 32.0,
+                top: 30.0,
               ),
               child: PeriodCard(),
             ),
+            Container(
+              margin: EdgeInsets.only(top: 50),
+              child: PieChart(
+                diameter: screenWidth - 64,
+              ),
+            ),
+            //CategoryCard(),
+            _buildCarousel(context, 2),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildCarousel(BuildContext context, int carouselIndex) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        SizedBox(
+          height: 196.0,
+          child: PageView(
+            controller: PageController(
+              viewportFraction: 0.8,
+              initialPage: 1,
+            ),
+            children: [
+              _buildCarouselItem(WideCard()),
+              _buildCarouselItem(
+                WideCard(
+                  child: CategoryCard(
+                    amount: ' 1593,58',
+                    percentage: 25,
+                    icon: Image.asset(
+                      'assets/images/cup.png',
+                    ),
+                    title: 'Restaurants',
+                  ),
+                ),
+              ),
+              _buildCarouselItem(WideCard()),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildCarouselItem(Widget widget) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 50, horizontal: 12),
+      //margin: EdgeInsets.symmetric(horizontal: 12),
+      child: widget,
     );
   }
 }

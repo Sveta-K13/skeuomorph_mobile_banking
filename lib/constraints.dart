@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 const linearGradient = LinearGradient(
   //transform: GradientRotation(3.14  / 2),
-  begin: FractionalOffset(-0.6, -0.6),
-  end: FractionalOffset(1.8, 1.8),
+  begin: Alignment(-5, -3),
+  end: Alignment(5, 2.8),
   //stops: [-0.6, 1.8],
   colors: [
     Color(0xFF32383E),
