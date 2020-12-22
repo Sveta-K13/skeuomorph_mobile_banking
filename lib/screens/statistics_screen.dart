@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:skeuomorph_mobile_banking/widgets/category_card.dart';
 import 'package:skeuomorph_mobile_banking/widgets/period_card.dart';
 import 'package:skeuomorph_mobile_banking/widgets/pie_chart.dart';
+import 'package:skeuomorph_mobile_banking/widgets/sk_button.dart';
+
+const iconsUrl = {
+  'house': 'assets/images/house_def.png',
+  'house_pressed': 'assets/images/house_pressed.png',
+  'cross': 'assets/images/cross_def.png',
+  'cross_pressed': 'assets/images/cross_pressed.png',
+  'cards': 'assets/images/cards_def.png',
+  'cards_pressed': 'assets/images/cards_pressed.png',
+  'settings': 'assets/images/settings.png',
+  'settings_pressed': 'assets/images/settings_pressed.png',
+};
 
 class StatisticsScreen extends StatelessWidget {
   final String title;
@@ -41,25 +53,28 @@ class StatisticsScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 32.0,
-                right: 32.0,
-                top: 30.0,
+        body: SingleChildScrollView(
+          //physics: NeverScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 32.0,
+                  right: 32.0,
+                  top: 30.0,
+                ),
+                child: PeriodCard(),
               ),
-              child: PeriodCard(),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 50),
-              child: PieChart(
-                diameter: screenWidth - 64,
+              Container(
+                margin: EdgeInsets.only(top: 50),
+                child: PieChart(
+                  diameter: screenWidth - 64,
+                ),
               ),
-            ),
-            //CategoryCard(),
-            _buildCarousel(context, 2),
-          ],
+              //CategoryCard(),
+              _buildCarousel(context, 2),
+            ],
+          ),
         ),
       ),
     );
@@ -93,7 +108,31 @@ class StatisticsScreen extends StatelessWidget {
               _buildCarouselItem(WideCard()),
             ],
           ),
-        )
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SkButton(
+                child: Image.asset(iconsUrl['house']),
+                pressedChild: Image.asset(iconsUrl['house_pressed']),
+              ),
+              SkButton(
+                child: Image.asset(iconsUrl['cross']),
+                pressedChild: Image.asset(iconsUrl['cross_pressed']),
+              ),
+              SkButton(
+                child: Image.asset(iconsUrl['cards']),
+                pressedChild: Image.asset(iconsUrl['cards_pressed']),
+              ),
+              SkButton(
+                child: Image.asset(iconsUrl['settings']),
+                pressedChild: Image.asset(iconsUrl['settings_pressed']),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -101,7 +140,6 @@ class StatisticsScreen extends StatelessWidget {
   Widget _buildCarouselItem(Widget widget) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 50, horizontal: 12),
-      //margin: EdgeInsets.symmetric(horizontal: 12),
       child: widget,
     );
   }

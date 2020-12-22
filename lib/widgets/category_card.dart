@@ -8,9 +8,7 @@ class WideCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
     return Container(
-      width: screenSize.width - 84,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         gradient: linearGradient,
@@ -79,7 +77,7 @@ class CategoryCard extends StatelessWidget {
           ),
         ),
         child: Container(
-          padding: EdgeInsets.all(1.0),
+          padding: EdgeInsets.all(1.5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             gradient: RadialGradient(

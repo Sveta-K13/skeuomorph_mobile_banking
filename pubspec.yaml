@@ -49,6 +49,14 @@ flutter:
   assets:
     - assets/svg/cup.svg
     - assets/images/cup.png
+    - assets/images/settings.png
+    - assets/images/settings_pressed.png
+    - assets/images/house_def.png
+    - assets/images/house_pressed.png
+    - assets/images/cross_def.png
+    - assets/images/cross_pressed.png
+    - assets/images/cards_def.png
+    - assets/images/cards_pressed.png
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
