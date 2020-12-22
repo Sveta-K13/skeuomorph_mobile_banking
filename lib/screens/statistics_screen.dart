@@ -3,6 +3,7 @@ import 'package:skeuomorph_mobile_banking/widgets/category_card.dart';
 import 'package:skeuomorph_mobile_banking/widgets/period_card.dart';
 import 'package:skeuomorph_mobile_banking/widgets/pie_chart.dart';
 import 'package:skeuomorph_mobile_banking/widgets/sk_button.dart';
+import 'package:skeuomorph_mobile_banking/widgets/swipe_button.dart';
 
 const iconsUrl = {
   'house': 'assets/images/house_def.png',
@@ -37,18 +38,33 @@ class StatisticsScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.transparent,
           bottom: PreferredSize(
-            preferredSize: Size(double.infinity, 40),
-            child: Text(
-              title,
-              style: TextStyle(
-                color: Color(0xFFD6E1EF),
-                fontSize: 36,
-                fontFamily: 'Gilroy',
-                fontWeight: FontWeight.w700,
+            preferredSize: Size(double.infinity, 20),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Row(
+                children: [
+                  Stack(
+                    children: [
+                      SwipeButton(),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      color: Color(0xFFD6E1EF),
+                      fontSize: 36,
+                      fontFamily: 'Gilroy',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Container(),
+                ],
               ),
             ),
           ),
@@ -71,7 +87,6 @@ class StatisticsScreen extends StatelessWidget {
                   diameter: screenWidth - 64,
                 ),
               ),
-              //CategoryCard(),
               _buildCarousel(context, 2),
             ],
           ),

@@ -57,6 +57,8 @@ flutter:
     - assets/images/cross_pressed.png
     - assets/images/cards_def.png
     - assets/images/cards_pressed.png
+    - assets/images/arrow_back.png
+    
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
