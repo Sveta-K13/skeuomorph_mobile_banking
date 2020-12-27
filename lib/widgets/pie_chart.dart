@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeuomorph_mobile_banking/widgets/pie_chart_painter.dart';
 
 class PieChart extends StatelessWidget {
   final double diameter;
@@ -12,8 +13,8 @@ class PieChart extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(diameter / 2),
         gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          begin: Alignment(-1.2, -1.4),
+          end: Alignment(1.2, 1.3),
           colors: [
             Color(0xFF353A40),
             Color(0xFF121416),
@@ -40,21 +41,28 @@ class PieChart extends StatelessWidget {
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(diameter / 2),
             boxShadow: [
-              BoxShadow(
-                color: Color(0xFF070709).withOpacity(0.5),
-                offset: Offset(2, 3),
-                blurRadius: 12,
-                spreadRadius: -20,
-              ),
-              BoxShadow(
-                color: Color(0xFF070709).withOpacity(0.5),
-              ),
-              BoxShadow(
-                color: Color(0xFF2C333A),
-                spreadRadius: -12.0,
-                blurRadius: 12.0,
-              ),
+              // BoxShadow(
+              //   color: Color(0xFF070709).withOpacity(0.5),
+              //   offset: Offset(2, 3),
+              //   blurRadius: 12,
+              //   spreadRadius: -20,
+              // ),
+              // BoxShadow(
+              //   color: Color(0xFF070709).withOpacity(0.5),
+              // ),
+              // BoxShadow(
+              //   color: Color(0xFF2C333A),
+              //   spreadRadius: -12.0,
+              //   blurRadius: 12.0,
+              // ),
             ],
+          ),
+          child: CustomPaint(
+            size: Size(500, 500),
+            painter: PieCharPainter(
+              outerRadius: diameter * 0.89 / 2,
+              innerRadius: 53,
+            ),
           ),
         ),
       ),

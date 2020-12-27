@@ -92,7 +92,13 @@ class _SkButtonState extends State<SkButton> {
     );
     return GestureDetector(
       onTap: () => _pressButton(),
-      child: isPressed ? pressedButton : defaultButton,
+      child: AnimatedCrossFade(
+        duration: Duration(milliseconds: 70),
+        crossFadeState:
+            isPressed ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+        firstChild: pressedButton,
+        secondChild: defaultButton,
+      ),
     );
   }
 }
