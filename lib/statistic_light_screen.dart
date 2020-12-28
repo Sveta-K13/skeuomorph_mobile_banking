@@ -159,15 +159,19 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: bottomIcons
                     .map((Map<String, String> map) => GestureDetector(
-                          onTap: () {
+                          onTapDown: (details) {
                             setState(() {
                               currentBottomIndex = bottomIcons.indexOf(map);
                             });
                           },
-                          child: CurveButton(
-                              bottomIcons.indexOf(map) == currentBottomIndex,
-                              map['icon'],
-                              map['filled_icon']),
+                          child: AnimatedSwitcher(
+                            duration: Duration(milliseconds: 500),
+                            child:
+                                bottomIcons.indexOf(map) == currentBottomIndex
+                                    ? CurveTappedButton(
+                                        map['icon'], map['filled_icon'])
+                                    : CurveUntappedButton(map['icon']),
+                          ),
                         ))
                     .toList(),
               ),

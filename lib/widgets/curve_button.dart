@@ -3,12 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:skeuomorph_mobile_banking/theme.dart';
 
-class CurveButton extends StatelessWidget {
-  final bool isPressed;
+class CurveUntappedButton extends StatelessWidget {
   final String iconBorder;
-  final String icon;
 
-  CurveButton(this.isPressed, this.iconBorder, this.icon);
+  CurveUntappedButton(this.iconBorder);
 
   Widget _buildUntappedButton() {
     return Container(
@@ -33,6 +31,18 @@ class CurveButton extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildUntappedButton();
+  }
+}
+
+class CurveTappedButton extends StatelessWidget {
+  final String iconBorder;
+  final String icon;
+
+  CurveTappedButton(this.iconBorder, this.icon);
 
   Widget _buildTappedButton() {
     return Container(
@@ -93,6 +103,6 @@ class CurveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isPressed ? _buildTappedButton() : _buildUntappedButton();
+    return _buildTappedButton();
   }
 }
