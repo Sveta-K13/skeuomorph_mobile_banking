@@ -52,8 +52,8 @@ List<BoxShadow> skShadow = <BoxShadow>[
     color: Color(0xFF8CA2B7).withOpacity(0.4),
   ),
   BoxShadow(
-    blurRadius: 6.0,
-    offset: Offset(-2.5, -1.5),
+    blurRadius: 8.0,
+    offset: Offset(-3.5, -2.5),
     color: Color(0xFFFFFFFF),
   ),
 ];

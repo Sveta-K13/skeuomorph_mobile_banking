@@ -74,7 +74,7 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: <Color>[
           Color(0xFFF1F5F8),
-          Color(0xFFEDF2F8),
+          Color(0xFFDDE7F3),
           Color(0xFFE5F0F9),
         ], transform: GradientRotation(pi / 2), tileMode: TileMode.clamp),
       ),
@@ -113,42 +113,40 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
                 currentIndex: currentListIndex,
               ),
             ),
-            Flexible(
-              child: Container(
-                height: 128,
-                child: NotificationListener<ScrollNotification>(
-                  onNotification: (scrollNotification) {
-                    setState(() {
-                      currentListIndex = _scrollController.offset ~/
-                          (MediaQuery.of(context).size.width - 80);
-                    });
-                    return true;
-                  },
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    physics: _physics,
-                    scrollDirection: Axis.horizontal,
-                    child: ListView.builder(
-                        physics: _physics,
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemCount: outcomes.length,
-                        itemBuilder: (BuildContext context, int i) {
-                          if (i == 0) {
-                            return Padding(
-                              padding: EdgeInsets.only(left: 24.0),
-                              child: CategoryCard(outcomes[i]),
-                            );
-                          }
-                          if (i == outcomes.length - 1) {
-                            return Padding(
-                              padding: EdgeInsets.only(right: 24.0),
-                              child: CategoryCard(outcomes[i]),
-                            );
-                          }
-                          return CategoryCard(outcomes[i]);
-                        }),
-                  ),
+            Container(
+              height: 128,
+              child: NotificationListener<ScrollNotification>(
+                onNotification: (scrollNotification) {
+                  setState(() {
+                    currentListIndex = _scrollController.offset ~/
+                        (MediaQuery.of(context).size.width - 80);
+                  });
+                  return true;
+                },
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  physics: _physics,
+                  scrollDirection: Axis.horizontal,
+                  child: ListView.builder(
+                      physics: _physics,
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: outcomes.length,
+                      itemBuilder: (BuildContext context, int i) {
+                        if (i == 0) {
+                          return Padding(
+                            padding: EdgeInsets.only(left: 24.0),
+                            child: CategoryCard(outcomes[i]),
+                          );
+                        }
+                        if (i == outcomes.length - 1) {
+                          return Padding(
+                            padding: EdgeInsets.only(right: 24.0),
+                            child: CategoryCard(outcomes[i]),
+                          );
+                        }
+                        return CategoryCard(outcomes[i]);
+                      }),
                 ),
               ),
             ),

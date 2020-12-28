@@ -13,7 +13,7 @@ class CategoryCard extends StatelessWidget {
       constraints:
           BoxConstraints(minWidth: MediaQuery.of(context).size.width - 64),
       margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-      padding: EdgeInsets.all(2.0),
+      padding: EdgeInsets.all(3.0),
       decoration: BoxDecoration(
         boxShadow: skShadow,
         color: uiBgColor,
