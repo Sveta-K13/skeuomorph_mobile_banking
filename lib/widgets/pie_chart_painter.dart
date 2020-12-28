@@ -20,8 +20,8 @@ class PieCharPainter extends CustomPainter {
       ..strokeWidth = 2.0
       ..color = Colors.orange
       ..shader = ui.Gradient.linear(
-        Offset(-150, -50),
-        Offset(300, 400),
+        Offset(0, 0),
+        Offset(size.width, size.width),
         [
           Color(0xFF2C333A),
           Color(0xFF131517),
@@ -41,6 +41,7 @@ class PieCharPainter extends CustomPainter {
       size: size,
       startAngle: geometry.toRad(92),
       sweepAngle: geometry.toRad(86),
+      isActive: true,
     );
     _drawSector(
       canvas: canvas,
@@ -63,32 +64,31 @@ class PieCharPainter extends CustomPainter {
     return true;
   }
 
-  void _drawGizmos(Offset center, Canvas canvas, Paint paint) {
-    for (double i = 0; i <= 360; i += 10) {
-      canvas.drawCircle(
-          geometry.cartesian(outerRadius, geometry.toRad(i)) + center,
-          5,
-          paint);
-    }
-  }
+  // void _drawGizmos(Offset center, Canvas canvas, Paint paint) {
+  //   for (double i = 0; i <= 360; i += 10) {
+  //     canvas.drawCircle(
+  //         geometry.cartesian(outerRadius, geometry.toRad(i)) + center,
+  //         5,
+  //         paint);
+  //   }
+  // }
 
-  void _drawPoints(Canvas canvas, List<Offset> points, Paint paint) {
-    points.forEach((point) => canvas.drawCircle(point, 5, paint));
-  }
+  // void _drawPoints(Canvas canvas, List<Offset> points, Paint paint) {
+  //   points.forEach((point) => canvas.drawCircle(point, 5, paint));
+  // }
 
   void _drawSector(
       {final Canvas canvas,
       final Size size,
       final double startAngle,
       final double sweepAngle,
-      Paint paint}) {
+      Paint paint,
+      bool isActive = false}) {
     final center = Offset(size.width / 2, size.height / 2);
 
     final path = Path();
-    // var startAngle = geometry.toRad(270);
-    // var sweepAngle = geometry.toRad(180);
     final delta = geometry.toRad(3);
-    var bezierAngle1 = 3 * delta;
+    var deltaAngle = 3 * delta;
 
     final p0 =
         Offset.fromDirection(startAngle, innerRadius + borderRadius) + center;
@@ -99,13 +99,13 @@ class PieCharPainter extends CustomPainter {
 
     final cp1 = Offset.fromDirection(startAngle, outerRadius) + center;
     final p2 =
-        Offset.fromDirection(startAngle + bezierAngle1, outerRadius) + center;
+        Offset.fromDirection(startAngle + deltaAngle, outerRadius) + center;
     path.quadraticBezierTo(cp1.dx, cp1.dy, p2.dx, p2.dy);
 
     path.arcTo(
       Rect.fromCircle(center: center, radius: outerRadius),
-      startAngle + bezierAngle1,
-      sweepAngle - 1.5 * bezierAngle1,
+      startAngle + deltaAngle,
+      sweepAngle - 1.5 * deltaAngle,
       false,
     );
 
@@ -119,13 +119,12 @@ class PieCharPainter extends CustomPainter {
     final p4 = Offset.fromDirection(
             startAngle + sweepAngle, innerRadius + borderRadius) +
         center;
-    //path.moveTo(p3.dx, p3.dy);
     path.lineTo(p4.dx, p4.dy);
 
     final cp3 =
         Offset.fromDirection(startAngle + sweepAngle, innerRadius) + center;
     final p5 = Offset.fromDirection(
-            startAngle + sweepAngle - 1.5 * bezierAngle1, innerRadius) +
+            startAngle + sweepAngle - 1.5 * deltaAngle, innerRadius) +
         center;
     path.quadraticBezierTo(cp3.dx, cp3.dy, p5.dx, p5.dy);
 
@@ -134,18 +133,115 @@ class PieCharPainter extends CustomPainter {
         Offset.fromDirection(startAngle + sweepAngle, innerRadius + 15) +
             center;
     final p6 =
-        Offset.fromDirection(startAngle + 1.5 * bezierAngle1, innerRadius) +
+        Offset.fromDirection(startAngle + 1.5 * deltaAngle, innerRadius) +
             center;
-    //path.quadraticBezierTo(cp5.dx, cp5.dy, p6.dx, p6.dy);
-    // path.arcTo(Rect.fromCircle(center: center, radius: innerRadius),
-    //     startAngle + bezierAngle1, sweepAngle - 2 * bezierAngle1, true);
     path.arcToPoint(p6, radius: Radius.circular(innerRadius), clockwise: false);
     path.moveTo(p6.dx, p6.dy);
     path.quadraticBezierTo(cp4.dx, cp4.dy, p0.dx, p0.dy);
 
     path.close();
-    //canvas.drawShadow(path.shift(Offset(0, -5)), Colors.black, 2.0, true);
+
+    final lightPaint1 = Paint();
+    lightPaint1
+      ..shader = LinearGradient(
+        colors: <Color>[
+          Color(0xFF2C333A).withAlpha(0),
+          Color(0xFFFFFFFF).withAlpha(15),
+        ],
+        begin: Alignment(-0.2, 0.2),
+        end: Alignment(0.7, 0.7),
+      ).createShader(path.getBounds());
+
+    final lightPaint2 = Paint();
+    lightPaint2
+      ..shader = LinearGradient(
+        colors: <Color>[
+          Color(0xFF2C333A).withAlpha(3),
+          Color(0xFFFFFFFF).withAlpha(20),
+        ],
+        begin: Alignment(0.7, 0.6),
+        end: Alignment(1.4, 0.5),
+        //stops: [0.5, 0.9],
+      ).createShader(path.getBounds());
+
+    final shadowPaint = Paint()
+      ..shader = LinearGradient(
+        colors: <Color>[
+          Colors.black.withAlpha(60),
+          Colors.black.withAlpha(0),
+        ],
+        begin: Alignment(-1, -1),
+        end: Alignment(0.5, 0.5),
+      ).createShader(path.getBounds());
+
+    final shadowMask = Paint()
+      ..color = Color(0xFF2C333A).withOpacity(0.2)
+      ..maskFilter = MaskFilter.blur(BlurStyle.inner, 6);
+
     canvas.drawPath(path, paint);
-    //_drawPoints(canvas, [p6, p5], pointPaint);
+    canvas.drawPath(path, lightPaint1);
+    canvas.drawPath(path, lightPaint2);
+    canvas.drawPath(path, shadowPaint);
+    canvas.drawPath(path, shadowMask);
+
+    final sectorPaint = Paint()
+      ..shader = LinearGradient(
+        begin: Alignment(-2, 0),
+        end: Alignment(0.4, 0.4),
+        colors: [
+          Color(0xFFFFA05C),
+          Color(0xFFF06500),
+        ],
+      ).createShader(path.getBounds());
+    if (isActive) {
+      canvas.drawShadow(path.shift(Offset(-16, 20)),
+          Color(0xFFF46600).withAlpha(30), 40, false);
+      canvas.drawShadow(path.shift(Offset(-1, -40)),
+          Color(0xFFF46600).withAlpha(30), 40, false);
+      canvas.drawShadow(path.shift(Offset(-2, -2)),
+          Color(0xFFFF9040).withAlpha(60), 24, false);
+
+      canvas.drawPath(path, sectorPaint);
+      final p = Offset.fromDirection(geometry.toRad(122.5),
+              innerRadius + (outerRadius - innerRadius) / 2 + 15) +
+          center;
+      drawText(canvas, '25%', p.dx, p.dy, 5 * 3.14 / 4);
+    }
+  }
+
+  void drawText(Canvas context, String title, double x, double y,
+      double angleRotationInRadians) {
+    context.save();
+    context.translate(x, y);
+    context.rotate(angleRotationInRadians);
+    TextSpan span = new TextSpan(
+      style: new TextStyle(
+        color: Color(0xFF612901).withOpacity(0.6),
+        fontSize: 28.0,
+        fontFamily: 'Gilroy',
+        fontWeight: FontWeight.bold,
+        shadows: [
+          Shadow(
+            offset: Offset(-1, 0),
+            blurRadius: 2,
+            color: Color(0xFFFEEDE0).withAlpha(20),
+          ),
+          Shadow(
+            offset: Offset(1, 1),
+            blurRadius: 2,
+            color: Color(0xFF773607).withAlpha(30),
+          ),
+        ],
+      ),
+      text: title,
+    );
+    TextPainter tp = new TextPainter(
+      text: span,
+      textAlign: TextAlign.left,
+      textDirection: TextDirection.ltr,
+    );
+    tp.layout();
+    tp.paint(context, new Offset(0.0, 0.0));
+    context.restore();
   }
 }

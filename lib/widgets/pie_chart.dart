@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_circular_text/circular_text/model.dart';
+import 'package:flutter_circular_text/circular_text/widget.dart';
 import 'package:skeuomorph_mobile_banking/widgets/pie_chart_painter.dart';
 
 class PieChart extends StatelessWidget {
@@ -40,29 +42,50 @@ class PieChart extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(diameter / 2),
-            boxShadow: [
-              // BoxShadow(
-              //   color: Color(0xFF070709).withOpacity(0.5),
-              //   offset: Offset(2, 3),
-              //   blurRadius: 12,
-              //   spreadRadius: -20,
-              // ),
-              // BoxShadow(
-              //   color: Color(0xFF070709).withOpacity(0.5),
-              // ),
-              // BoxShadow(
-              //   color: Color(0xFF2C333A),
-              //   spreadRadius: -12.0,
-              //   blurRadius: 12.0,
-              // ),
-            ],
           ),
-          child: CustomPaint(
-            size: Size(500, 500),
-            painter: PieCharPainter(
-              outerRadius: diameter * 0.89 / 2,
-              innerRadius: 53,
-            ),
+          child: Stack(
+            children: [
+              CustomPaint(
+                size: Size(500, 500),
+                painter: PieCharPainter(
+                  outerRadius: diameter * 0.89 / 2,
+                  innerRadius: 53,
+                ),
+              ),
+              Center(
+                child: Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(40),
+                    color: Color(0xFF35393E),
+                  ),
+                ),
+              ),
+              Center(
+                child: CircularText(
+                  radius: 32,
+                  children: [
+                    TextItem(
+                      startAngle: 110,
+                      text: Text(
+                        'Press to switch income or outcome',
+                        style: TextStyle(
+                          fontFamily: 'Gilroy',
+                          fontSize: 6,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFC9CED3).withAlpha(80),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment(0, 0.02),
+                child: Image.asset('assets/images/lamp.png'),
+              ),
+            ],
           ),
         ),
       ),

@@ -24,6 +24,7 @@ dependencies:
   flutter_svg: ^0.19.2
   flutter:
     sdk: flutter
+  flutter_circular_text: "^0.3.0"
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -58,7 +59,7 @@ flutter:
     - assets/images/cards_def.png
     - assets/images/cards_pressed.png
     - assets/images/arrow_back.png
-    
+    - assets/images/lamp.png
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

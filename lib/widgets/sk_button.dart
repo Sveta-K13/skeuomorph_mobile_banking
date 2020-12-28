@@ -42,7 +42,7 @@ class _SkButtonState extends State<SkButton> {
           begin: Alignment(-3, -2),
           end: Alignment(5, 1),
           colors: [
-            Color(0xFFC8D5E1).withOpacity(1.0),
+            Color(0xFFC8D5E1).withOpacity(0.4),
             Colors.black.withOpacity(0),
           ],
         ),
@@ -51,8 +51,8 @@ class _SkButtonState extends State<SkButton> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
-            begin: Alignment.bottomRight,
-            end: Alignment.center,
+            begin: Alignment(1, 1),
+            end: Alignment(-0.8, -0.8),
             colors: [
               Color(0xFF2C333A),
               Color(0xFF121416),
@@ -84,7 +84,7 @@ class _SkButtonState extends State<SkButton> {
           BoxShadow(
             offset: Offset(4, 4),
             blurRadius: 18,
-            color: Colors.black.withOpacity(0.5),
+            color: Colors.black.withOpacity(0.1),
           ),
         ],
       ),
@@ -93,7 +93,7 @@ class _SkButtonState extends State<SkButton> {
     return GestureDetector(
       onTap: () => _pressButton(),
       child: AnimatedCrossFade(
-        duration: Duration(milliseconds: 70),
+        duration: Duration(milliseconds: 100),
         crossFadeState:
             isPressed ? CrossFadeState.showFirst : CrossFadeState.showSecond,
         firstChild: pressedButton,
