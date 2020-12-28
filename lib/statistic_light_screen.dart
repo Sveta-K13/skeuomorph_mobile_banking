@@ -163,7 +163,9 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
                             });
                           },
                           child: AnimatedSwitcher(
-                            duration: Duration(milliseconds: 500),
+                            duration: Duration(milliseconds: 300),
+                            switchInCurve: Curves.fastLinearToSlowEaseIn,
+                            switchOutCurve: Curves.easeOut,
                             child:
                                 bottomIcons.indexOf(map) == currentBottomIndex
                                     ? CurveTappedButton(
