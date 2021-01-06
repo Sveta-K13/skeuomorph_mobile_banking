@@ -1,10 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:skeuomorph_mobile_banking/models/outcome.dart';
 import 'package:skeuomorph_mobile_banking/theme.dart';
 import 'package:skeuomorph_mobile_banking/utils/CustomScrollPhysics.dart';
+import 'package:skeuomorph_mobile_banking/utils/theme_settings.dart';
 import 'package:skeuomorph_mobile_banking/widgets/category_card.dart';
 import 'package:skeuomorph_mobile_banking/widgets/curve_button.dart';
 import 'package:skeuomorph_mobile_banking/widgets/period_card.dart';
@@ -69,20 +69,19 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: <Color>[
-          Color(0xFFF1F5F8),
-          Color(0xFFDDE7F3),
-          Color(0xFFE5F0F9),
-        ], transform: GradientRotation(pi / 2), tileMode: TileMode.clamp),
+        gradient: AppTheme.bgGradient,
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
         appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
           title: Row(
             children: [
               SwipeButton(),
@@ -92,8 +91,7 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
               Text(
                 'Statistic',
                 style: TextStyle(
-                  color: textColor,
-                  fontFamily: fontFamily,
+                  color: Theme.of(context).accentColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 34.0,
                 ),
@@ -111,6 +109,13 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
               child: PieChart(
                 outcomes: outcomes,
                 currentIndex: currentListIndex,
+                onTap: () {
+                  setState(() {
+                    Provider.of<ThemeSettings>(context, listen: false).setTheme(
+                        !Provider.of<ThemeSettings>(context, listen: false)
+                            .isDarkMode);
+                  });
+                },
               ),
             ),
             Container(

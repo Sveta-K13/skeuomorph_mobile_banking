@@ -29,6 +29,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   flutter_circular_text: ^0.3.0
+  shared_preferences: ^0.5.12+4
+  provider: ^4.3.2+3
+
 
 dev_dependencies:
   flutter_test:

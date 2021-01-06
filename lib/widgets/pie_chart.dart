@@ -13,9 +13,15 @@ class PieChartPainter extends CustomPainter {
   final List<Outcome> outcomes;
   final int currentIndex;
   final double padding;
+  final Color uiBgColor;
+  final LinearGradient shadowGradient;
 
   PieChartPainter(
-      {@required this.outcomes, this.currentIndex, this.padding = 16});
+      {@required this.outcomes,
+      this.currentIndex,
+      this.uiBgColor,
+      this.shadowGradient,
+      this.padding = 16});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -31,10 +37,10 @@ class PieChartPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
     final Paint shadowPaint = Paint()
       ..maskFilter = MaskFilter.blur(BlurStyle.normal, 10)
-      ..color = Color(0xFF8CA2B7).withOpacity(0.4);
+      ..color = shadowGradient.colors[1];
     final Paint lightPaint = Paint()
       ..maskFilter = MaskFilter.blur(BlurStyle.normal, 10)
-      ..color = Color(0xFFFFFFFF);
+      ..color = shadowGradient.colors[0];
 
     Paint sectorBgPaint = Paint();
     Paint sectorPaint = Paint();
@@ -129,8 +135,8 @@ class PieChartPainter extends CustomPainter {
       } else {
         sectorBgPaint
           ..shader = LinearGradient(colors: <Color>[
-            Color(0xFF8CA2B7).withOpacity(0.4),
-            Color(0xFFFFFFFF),
+            shadowGradient.colors[1],
+            shadowGradient.colors[0],
           ], begin: Alignment.topLeft, end: Alignment.topCenter)
               .createShader(sectorPath.getBounds());
         sectorPaint
@@ -155,8 +161,10 @@ class PieChartPainter extends CustomPainter {
 class PieChart extends StatelessWidget {
   final List<Outcome> outcomes;
   final int currentIndex;
+  final Function onTap;
+  final GlobalKey lampKey;
 
-  PieChart({this.outcomes, this.currentIndex = 1});
+  PieChart({this.outcomes, this.currentIndex = 1, this.onTap, this.lampKey});
 
   @override
   Widget build(BuildContext context) {
@@ -164,8 +172,12 @@ class PieChart extends StatelessWidget {
       height: 265,
       width: 265,
       child: CustomPaint(
-        painter:
-            PieChartPainter(outcomes: outcomes, currentIndex: currentIndex),
+        painter: PieChartPainter(
+          outcomes: outcomes,
+          currentIndex: currentIndex,
+          uiBgColor: Theme.of(context).primaryColor,
+          shadowGradient: AppTheme.borderGradient
+        ),
         child: Stack(
           children: [
             Align(
@@ -179,7 +191,6 @@ class PieChart extends StatelessWidget {
                           color: Color.alphaBlend(
                               Color(0xFF000000).withOpacity(0.3),
                               outcomes[currentIndex].color),
-                          fontFamily: fontFamily,
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
                         ),
@@ -192,7 +203,7 @@ class PieChart extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: LampButton(),
+              child: LampButton(onTap: onTap,),
             ),
           ],
         ),

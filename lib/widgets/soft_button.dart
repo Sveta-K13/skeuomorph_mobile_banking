@@ -22,16 +22,16 @@ class _SoftButtonState extends State<SoftButton> {
       child: Container(
         margin: EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          boxShadow: skShadow,
-          gradient: isTapped ? innerBoxGradient : null,
-          color: uiBgColor,
+          boxShadow: AppTheme.outerShadow,
+          gradient: isTapped ? AppTheme.innerBoxGradient : null,
+          color: Theme.of(context).primaryColor,
           shape: BoxShape.circle,
         ),
         child: Padding(
           padding: EdgeInsets.all(10),
           child: ShaderMask(
             shaderCallback: (Rect bounds) {
-              return iconGradient.createShader(bounds);
+              return AppTheme.iconGradient.createShader(bounds);
             },
             blendMode: BlendMode.srcIn,
             child: Icon(

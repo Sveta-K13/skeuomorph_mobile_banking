@@ -7,6 +7,8 @@ import 'package:skeuomorph_mobile_banking/theme.dart';
 import 'package:skeuomorph_mobile_banking/utils/CustomLampShadow.dart';
 
 class LampButton extends StatefulWidget {
+  final Function onTap;
+  LampButton({this.onTap});
   @override
   _LampButtonState createState() => _LampButtonState();
 }
@@ -34,7 +36,10 @@ class _LampButtonState extends State<LampButton>
     return Container(
       height: 90,
       decoration: BoxDecoration(
-          shape: BoxShape.circle, color: uiBgColor, boxShadow: skShadow),
+        shape: BoxShape.circle,
+         color: Theme.of(context).primaryColor,
+        boxShadow: AppTheme.outerShadow,
+      ),
       child: Stack(
         children: [
           Align(
@@ -45,9 +50,9 @@ class _LampButtonState extends State<LampButton>
                     text: Text(
                       'PRESS TO SWITCH INCOME OR OUTCOME',
                       style: TextStyle(
-                          color: Color(0xFF000000).withOpacity(0.3),
-                          fontSize: 8,
-                          fontFamily: fontFamily),
+                        color: Theme.of(context).accentColor.withOpacity(0.3),
+                        fontSize: 8,
+                      ),
                     ),
                     startAngle: 115,
                     space: 10),
@@ -68,6 +73,7 @@ class _LampButtonState extends State<LampButton>
                   alignment: Alignment.center,
                   child: GestureDetector(
                     onTap: () {
+                      widget.onTap();
                       setState(() {
                         flipController.reset();
                         flipController.forward();
@@ -80,16 +86,12 @@ class _LampButtonState extends State<LampButton>
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFFFFFFFF),
-                              Color(0xFF000000).withOpacity(0.1),
-                            ],
-                            stops: [0.5, 1.5],
+                            colors: AppTheme.borderGradient.colors,
                             transform: GradientRotation(pi / 2),
                           ),
                           boxShadow: [
                             BoxShadow(
-                                color: redColor.withOpacity(0.2), blurRadius: 6)
+                                color: redColor.withOpacity(0.2), blurRadius: 8)
                           ]),
                       child: Container(
                         padding: EdgeInsets.all(1.0),

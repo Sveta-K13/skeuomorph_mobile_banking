@@ -11,9 +11,9 @@ class PeriodCard extends StatelessWidget {
         constraints: BoxConstraints(minHeight: 64.0),
         margin: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
         decoration: BoxDecoration(
-            color: uiBgColor,
-            borderRadius: boxBorderRadius,
-            boxShadow: skShadow),
+            color: Theme.of(context).primaryColor,
+            borderRadius: AppTheme.boxBorderRadius,
+            boxShadow: AppTheme.outerShadow),
         child: Row(
           children: [
             Padding(
@@ -21,8 +21,7 @@ class PeriodCard extends StatelessWidget {
               child: Text(
                 'Period:',
                 style: TextStyle(
-                  color: textColor.withOpacity(0.6),
-                  fontFamily: fontFamily,
+                   color: Theme.of(context).accentColor.withOpacity(0.6),
                   fontSize: 18,
                 ),
               ),
@@ -30,7 +29,9 @@ class PeriodCard extends StatelessWidget {
             Text(
               'Last 30 days',
               style: TextStyle(
-                  color: textColor, fontFamily: fontFamily, fontSize: 18),
+                color: Theme.of(context).accentColor,
+                fontSize: 18,
+              ),
             ),
             Expanded(child: Container()),
             SoftButton(),

@@ -15,21 +15,21 @@ class CategoryCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
       padding: EdgeInsets.all(3.0),
       decoration: BoxDecoration(
-        boxShadow: skShadow,
-        color: uiBgColor,
-        borderRadius: boxBorderRadius,
+        boxShadow: AppTheme.outerShadow,
+        color: Theme.of(context).primaryColor,
+        borderRadius: AppTheme.boxBorderRadius,
       ),
       child: Container(
         padding: EdgeInsets.all(1.0),
         decoration: BoxDecoration(
-          borderRadius: boxBorderRadius,
-          gradient: borderGradient,
+          borderRadius: AppTheme.boxBorderRadius,
+          gradient: AppTheme.borderGradient,
         ),
         child: Container(
           padding: EdgeInsets.all(16.0),
           decoration: BoxDecoration(
-            borderRadius: boxBorderRadius,
-            color: uiBgColor,
+            borderRadius: AppTheme.boxBorderRadius,
+            color: Theme.of(context).primaryColor,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -42,15 +42,14 @@ class CategoryCard extends StatelessWidget {
                   Image.asset(
                     _outcome.icon,
                     height: 22,
-                    color: textColor.withOpacity(0.8),
+                    color: Theme.of(context).accentColor.withOpacity(0.6),
                   ),
                   Text(
                     _outcome.name,
                     style: TextStyle(
                       fontSize: 18,
-                      color: textColor.withOpacity(0.8),
+                      color: Theme.of(context).accentColor.withOpacity(0.6),
                       fontWeight: FontWeight.bold,
-                      fontFamily: fontFamily,
                     ),
                   ),
                 ],
@@ -62,18 +61,16 @@ class CategoryCard extends StatelessWidget {
                   Text(
                     '${_outcome.percentage}%',
                     style: TextStyle(
-                      color: textColor,
+                      color: Theme.of(context).accentColor,
                       fontSize: 18,
-                      fontFamily: fontFamily,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     '\$ ${_outcome.sum}',
                     style: TextStyle(
-                      color: textColor,
+                      color: Theme.of(context).accentColor,
                       fontSize: 18,
-                      fontFamily: fontFamily,
                       fontWeight: FontWeight.bold,
                     ),
                   )

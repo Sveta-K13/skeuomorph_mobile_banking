@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:skeuomorph_mobile_banking/theme.dart';
 
@@ -8,20 +6,20 @@ class CurveUntappedButton extends StatelessWidget {
 
   CurveUntappedButton(this.iconBorder);
 
-  Widget _buildUntappedButton() {
+  Widget _buildUntappedButton(Color uiBgColor) {
     return Container(
       margin: EdgeInsets.all(8.0),
       height: 64,
       width: 64,
       decoration: BoxDecoration(
-        borderRadius: boxBorderRadius,
+        borderRadius: AppTheme.boxBorderRadius,
         color: uiBgColor,
-        boxShadow: skShadow,
+        boxShadow: AppTheme.outerShadow,
       ),
       child: Center(
         child: ShaderMask(
             shaderCallback: (Rect bound) {
-              return iconGradient.createShader(bound);
+              return AppTheme.iconGradient.createShader(bound);
             },
             blendMode: BlendMode.srcIn,
             child: Image.asset(
@@ -34,7 +32,7 @@ class CurveUntappedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildUntappedButton();
+    return _buildUntappedButton(Theme.of(context).primaryColor);
   }
 }
 
@@ -44,40 +42,33 @@ class CurveTappedButton extends StatelessWidget {
 
   CurveTappedButton(this.iconBorder, this.icon);
 
-  Widget _buildTappedButton() {
+  Widget _buildTappedButton(Color uiBgColor) {
     return Container(
       margin: EdgeInsets.all(8.0),
       padding: EdgeInsets.all(1.0),
       height: 64,
       width: 64,
       decoration: BoxDecoration(
-        borderRadius: boxBorderRadius,
-        gradient: rotatedBorderGradient,
+        borderRadius: AppTheme.boxBorderRadius,
+        gradient: AppTheme.rotatedBorderGradient,
       ),
       child: Container(
         padding: EdgeInsets.all(2.0),
         decoration: BoxDecoration(
-          borderRadius: boxBorderRadius,
+          borderRadius: AppTheme.boxBorderRadius,
           color: uiBgColor,
         ),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: boxBorderRadius,
-            gradient: innerBoxGradient,
+            borderRadius: AppTheme.boxBorderRadius,
+            gradient: AppTheme.innerBoxGradient,
           ),
           child: Center(
             child: Stack(
               children: [
                 ShaderMask(
                     shaderCallback: (Rect bound) {
-                      return LinearGradient(
-                        colors: <Color>[
-                          Color(0xFF5F83AD),
-                          Color(0xFFDEE9F3),
-                        ],
-                        transform: GradientRotation(pi / 4),
-                        stops: [0.35, 1.25],
-                      ).createShader(bound);
+                      return AppTheme.innerIconGradient.createShader(bound);
                     },
                     blendMode: BlendMode.srcIn,
                     child: Image.asset(
@@ -86,7 +77,7 @@ class CurveTappedButton extends StatelessWidget {
                     )),
                 ShaderMask(
                     shaderCallback: (Rect bound) {
-                      return borderGradient.createShader(bound);
+                      return AppTheme.borderGradient.createShader(bound);
                     },
                     blendMode: BlendMode.srcIn,
                     child: Image.asset(
@@ -103,6 +94,6 @@ class CurveTappedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildTappedButton();
+    return _buildTappedButton(Theme.of(context).primaryColor);
   }
 }

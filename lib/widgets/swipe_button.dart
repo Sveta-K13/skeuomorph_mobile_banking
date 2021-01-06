@@ -22,9 +22,6 @@ class _SwipeButtonState extends State<SwipeButton>
     position = Tween<Offset>(begin: Offset(0.0, 0.0), end: Offset(-0.5, 0.0))
         .animate(CurvedAnimation(
             parent: _slideController, curve: Curves.decelerate));
-    colorTween = ColorTween(begin: Color(0xFFEDF2F8), end: Color(0xFFA1B8CF))
-        .animate(CurvedAnimation(
-            parent: _slideController, curve: Curves.decelerate));
     super.initState();
   }
 
@@ -47,6 +44,9 @@ class _SwipeButtonState extends State<SwipeButton>
 
   @override
   Widget build(BuildContext context) {
+    colorTween = ColorTween(begin: Theme.of(context).primaryColor, end: AppTheme.borderGradient.colors[1].withOpacity(0.2))
+        .animate(CurvedAnimation(
+        parent: _slideController, curve: Curves.decelerate));
     return Stack(
       children: [
         Container(
@@ -54,7 +54,7 @@ class _SwipeButtonState extends State<SwipeButton>
           width: 80,
           padding: EdgeInsets.all(2.0),
           decoration: BoxDecoration(
-              gradient: rotatedBorderGradient,
+              gradient: AppTheme.rotatedBorderGradient,
               borderRadius: BorderRadius.all(Radius.circular(_radius + 1))),
           child: AnimatedBuilder(
             animation: colorTween,
@@ -63,7 +63,7 @@ class _SwipeButtonState extends State<SwipeButton>
               decoration: BoxDecoration(boxShadow: <BoxShadow>[
                 BoxShadow(
                     color:
-                        Color(0xFF8CA2B7).withOpacity(isSwitched ? 0.5 : 0.2)),
+                        AppTheme.borderGradient.colors[1]),
                 BoxShadow(
                   color: colorTween.value,
                   spreadRadius: -0.3,
@@ -77,7 +77,7 @@ class _SwipeButtonState extends State<SwipeButton>
           padding: const EdgeInsets.all(8.0),
           child: ShaderMask(
               shaderCallback: (Rect bounds) {
-                return iconGradient.createShader(bounds);
+                return AppTheme.iconGradient.createShader(bounds);
               },
               blendMode: BlendMode.srcIn,
               child: Icon(
@@ -94,11 +94,11 @@ class _SwipeButtonState extends State<SwipeButton>
                 height: 35,
                 width: 35,
                 decoration: BoxDecoration(
-                    color: Color(0xFFEDF2F8),
+                    color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.all(Radius.circular(_radius)),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                          color: Color(0xFF3A5165).withOpacity(0.2),
+                          color: AppTheme.iconGradient.colors[0].withOpacity(0.2),
                           offset: Offset(isSwitched ? 2.0 : -2.0, 0.0),
                           blurRadius: 6),
                     ]),
@@ -108,10 +108,7 @@ class _SwipeButtonState extends State<SwipeButton>
                     child: ShaderMask(
                       shaderCallback: (Rect bounds) {
                         return RadialGradient(
-                          colors: <Color>[
-                            Color(0xFFFFFFFF),
-                            Color(0xFFB2C3D6),
-                          ],
+                          colors: AppTheme.borderGradient.colors,
                           stops: [0.05, 1.0],
                         ).createShader(bounds);
                       },
