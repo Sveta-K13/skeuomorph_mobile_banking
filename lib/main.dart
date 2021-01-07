@@ -6,6 +6,7 @@ import 'package:skeuomorph_mobile_banking/theme.dart';
 import 'package:skeuomorph_mobile_banking/utils/theme_settings.dart';
 
 void main() {
+  Paint.enableDithering = true;
   runApp(MyApp());
 }
 

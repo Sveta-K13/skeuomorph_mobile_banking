@@ -21,7 +21,7 @@ class PeriodCard extends StatelessWidget {
               child: Text(
                 'Period:',
                 style: TextStyle(
-                   color: Theme.of(context).accentColor.withOpacity(0.6),
+                  color: Theme.of(context).accentColor.withOpacity(0.6),
                   fontSize: 18,
                 ),
               ),

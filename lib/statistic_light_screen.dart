@@ -155,33 +155,30 @@ class _StatisticLightScreenState extends State<StatisticLightScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: bottomIcons
-                    .map((Map<String, String> map) => GestureDetector(
-                          onTapDown: (details) {
-                            setState(() {
-                              currentBottomIndex = bottomIcons.indexOf(map);
-                            });
-                          },
-                          child: AnimatedSwitcher(
-                            duration: Duration(milliseconds: 300),
-                            switchInCurve: Curves.fastLinearToSlowEaseIn,
-                            switchOutCurve: Curves.easeOut,
-                            child:
-                                bottomIcons.indexOf(map) == currentBottomIndex
-                                    ? CurveTappedButton(
-                                        map['icon'], map['filled_icon'])
-                                    : CurveUntappedButton(map['icon']),
-                          ),
-                        ))
-                    .toList(),
-              ),
-            )
           ],
+        ),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: bottomIcons
+                .map((Map<String, String> map) => GestureDetector(
+                      onTapDown: (details) {
+                        setState(() {
+                          currentBottomIndex = bottomIcons.indexOf(map);
+                        });
+                      },
+                      child: AnimatedSwitcher(
+                        duration: Duration(milliseconds: 300),
+                        switchInCurve: Curves.fastLinearToSlowEaseIn,
+                        switchOutCurve: Curves.easeOut,
+                        child: bottomIcons.indexOf(map) == currentBottomIndex
+                            ? CurveTappedButton(map['icon'], map['filled_icon'])
+                            : CurveUntappedButton(map['icon']),
+                      ),
+                    ))
+                .toList(),
+          ),
         ),
       ),
     );
