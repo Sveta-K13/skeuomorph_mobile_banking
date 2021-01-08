@@ -23,41 +23,53 @@ class PieChartPainter extends CustomPainter {
       this.shadowGradient,
       this.padding = 16});
 
+  final double radius = 155;
+  final double innerRadius = 60;
+  final double offsetRadius = 10;
+  double centerX;
+  double currentX;
+  double centerY;
+  double currentY;
+  double lastAngle = -pi / 2;
+  double sweepAngle;
+
+  Paint sectorBgPaint = Paint();
+  Paint sectorPaint = Paint();
+  Paint selectedPaint;
+  Paint fillPaint;
+  Paint shadowPaint;
+  Paint lightPaint;
+  Paint selectedShadowPaint;
+
+  Path sectorPath;
+
   @override
   void paint(Canvas canvas, Size size) {
-    double radius = 155;
-    double innerRadius = 60;
-    double centerX = size.width / 2;
-    double centerY = size.height / 2;
-    double offsetRadius = 10;
+    centerX = size.width / 2;
+    centerY = size.height / 2;
 
-    final Paint fillPaint = Paint()
+    fillPaint = Paint()
       ..color = uiBgColor
       ..strokeWidth = 0.0
       ..style = PaintingStyle.fill;
-    final Paint shadowPaint = Paint()
+    shadowPaint = Paint()
       ..maskFilter = MaskFilter.blur(BlurStyle.normal, 10)
       ..color = shadowGradient.colors[1];
-    final Paint lightPaint = Paint()
+    lightPaint = Paint()
       ..maskFilter = MaskFilter.blur(BlurStyle.normal, 10)
       ..color = shadowGradient.colors[0];
-
-    Paint sectorBgPaint = Paint();
-    Paint sectorPaint = Paint();
 
     canvas.drawCircle(size.center(Offset(5, 5)), radius, shadowPaint);
     canvas.drawCircle(size.center(Offset(-5, -5)), radius, lightPaint);
     canvas.drawCircle(size.center(Offset.zero), radius, fillPaint);
 
-    double lastAngle = -pi / 2;
-    double currentY = getCoordinateY(
+    currentY = getCoordinateY(
         centerY, radius - padding - offsetRadius, lastAngle + 0.02);
-    double currentX = getCoordinateX(
+    currentX = getCoordinateX(
         centerX, radius - padding - offsetRadius, lastAngle + 0.02);
-    double sweepAngle;
     for (int i = 0; i < outcomes.length; i++) {
       sweepAngle = getSweepAngle(outcomes[i].percentage);
-      Path sectorPath = Path()
+      sectorPath = Path()
         ..moveTo(currentX, currentY)
         ..arcTo(
             Rect.fromCircle(
@@ -120,13 +132,13 @@ class PieChartPainter extends CustomPainter {
         ..lineTo(currentX, currentY);
 
       if (i == currentIndex) {
-        Paint selectedPaint = Paint()
+        selectedPaint = Paint()
           ..shader = LinearGradient(colors: [
             Color.alphaBlend(
                 Color(0xFFFFFFFF).withOpacity(0.6), outcomes[i].color),
             outcomes[i].color
           ]).createShader(sectorPath.getBounds());
-        Paint selectedShadowPaint = Paint()
+        selectedShadowPaint = Paint()
           ..color = outcomes[i].color.withOpacity(0.4)
           ..maskFilter = MaskFilter.blur(BlurStyle.normal, 6);
 
@@ -173,11 +185,10 @@ class PieChart extends StatelessWidget {
       width: 265,
       child: CustomPaint(
         painter: PieChartPainter(
-          outcomes: outcomes,
-          currentIndex: currentIndex,
-          uiBgColor: Theme.of(context).primaryColor,
-          shadowGradient: AppTheme.borderGradient
-        ),
+            outcomes: outcomes,
+            currentIndex: currentIndex,
+            uiBgColor: Theme.of(context).primaryColor,
+            shadowGradient: AppTheme.borderGradient),
         child: Stack(
           children: [
             Align(
@@ -203,7 +214,9 @@ class PieChart extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: LampButton(onTap: onTap,),
+              child: LampButton(
+                onTap: onTap,
+              ),
             ),
           ],
         ),
